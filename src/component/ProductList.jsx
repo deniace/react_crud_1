@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function ProductList() {
     const [products, setProducts] = useState([]);
@@ -45,6 +46,9 @@ function ProductList() {
                                 Price
                             </th>
                             <th scope="col" className="px-6 py-3 font-medium">
+                                Expired Date
+                            </th>
+                            <th scope="col" className="px-6 py-3 font-medium">
                                 Action
                             </th>
                         </tr>
@@ -62,10 +66,15 @@ function ProductList() {
                                     <td className="px-6 py-4">
                                         {product.price}
                                     </td>
+                                    <td className="px-6 py-4">
+                                        {product.expire_date ? new Date(product.expire_date).toLocaleDateString('en-GB') : ''}
+                                        {/* {new Date(product.expire_date).toString('yyyy-MM-dd')} */}
+                                        {/* {console.log(product.expire_date)} */}
+                                    </td>
                                     <td className="px-6 py-4 font-medium">
-                                        <button type="button" className="text-black bg-yellow-400 hover:bg-yellow-600 py-2 px-4 rounded mx-1 my-1">
+                                        <Link to={`/edit_product/${product.product_id}`} type="button" className="text-black bg-yellow-400 hover:bg-yellow-600 py-2 px-4 rounded mx-1 my-1">
                                             Edit
-                                        </button>
+                                        </Link>
                                         <button type="button" className="text-white bg-red-500 hover:bg-red-700 py-2 px-4 rounded mx-1 my-1 ">
                                             Delete
                                         </button>

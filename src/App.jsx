@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import ProductList from './component/ProductList';
 import AddProduct from './component/AddProduct';
+import EditProduct from './component/EditProduct';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/add_product" element={<AddProduct />} />
+        <Route path="/edit_product/:id" element={<EditProduct />} />
       </Routes>
       {/* <ProductList /> */}
       {/* <h1>Lorem ipsum dolor sit amet.</h1> */}
