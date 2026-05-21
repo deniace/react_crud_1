@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const AddProduct = () => {
     const [productName, setProductName] = useState('');
     const [price, setPrice] = useState('');
+    const [type, setType] = useState('');
+    const [date, setDate] = useState(null);
     const navigate = useNavigate();
 
     const saveProduct = async (e) => {
@@ -52,6 +54,35 @@ const AddProduct = () => {
                             value={price}
                             onChange={(e) => { setPrice(e.target.value) }}
                             required />
+                    </div>
+
+                    <div className='mb-6'>
+                        <label htmlFor="expired_date" className='block mb-2.5 text-sm font-medium text-heading'>Expired Date</label>
+                        <input
+                            type="date"
+                            id='expired_date'
+                            name='expired_date'
+                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+                            placeholder="expired date"
+                            value={date}
+                            onChange={(e) => { setDate(e.target.value) }}
+                            required />
+                    </div>
+
+                    <div className='mb-6'>
+                        <label htmlFor="types" className='block mb-2.5 text-sm font-medium text-heading'>Types</label>
+                        <select
+                            name="types"
+                            id="types"
+                            value={type}
+                            onChange={(e) => { setType(e.target.value) }}
+                            className='block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-900 '
+                        >
+                            <option value="">Select a type</option>
+                            <option value="1">Type 1</option>
+                            <option value="2">Type 2</option>
+                            <option value="3">Type 3</option>
+                        </select>
                     </div>
 
                     <button type='submit' className='text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'>

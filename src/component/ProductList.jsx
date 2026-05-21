@@ -24,9 +24,15 @@ function ProductList() {
 
     return (
         <div className="container mx-auto p-4">
-            <div className="relative overflow-x-auto bg-neutral-50 shadow-xs rounded-base border border-default">
 
-                <table className="w-full text-sm text-left text-body">
+            <div className="relative overflow-x-auto bg-neutral-50 shadow-xs rounded-base ">
+                <div className='py-3'>
+                    <a href="/add_product" className='text-white text-sm font-medium bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded my-2'>
+                        Add Product
+                    </a>
+                </div>
+
+                <table className="w-full text-sm text-left text-body mt-1">
                     <thead className="text-sm text-body bg-neutral-200 border-b border-default-medium">
                         <tr>
                             <th scope="col" className="px-6 py-3 font-medium">
