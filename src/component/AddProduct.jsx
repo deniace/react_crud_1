@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
@@ -7,8 +7,9 @@ const AddProduct = () => {
     const [productName, setProductName] = useState('');
     const [price, setPrice] = useState('');
     const [type, setType] = useState('');
-    const [date, setDate] = useState(null);
+    const [date, setDate] = useState("");
     const navigate = useNavigate();
+    const [merk, setMerk] = useState([]);
 
     const saveProduct = async (e) => {
         e.preventDefault();
@@ -16,7 +17,8 @@ const AddProduct = () => {
         try {
             await axios.post('http://localhost:3001/products', {
                 product_name: productName,
-                price: price
+                price: price,
+                type: type,
             }).then(response => {
                 console.log(response);
             });
@@ -25,6 +27,29 @@ const AddProduct = () => {
             console.log(error);
         }
     }
+
+    const getMerk = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/merks')
+                .then(response => {
+                    return response.data.data
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getMerk()
+            .then(data => {
+                setMerk(data);
+                console.log(data);
+            });
+    }, []);
 
     return (
         <div className='container mx-auto p-4'>
@@ -79,9 +104,9 @@ const AddProduct = () => {
                             className='block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-900 '
                         >
                             <option value="">Select a type</option>
-                            <option value="1">Type 1</option>
-                            <option value="2">Type 2</option>
-                            <option value="3">Type 3</option>
+                            {merk.map((item) => {
+                                return <option key={`merk-${item.id}`} value={item.id}>{item.merk_name}</option>
+                            })}
                         </select>
                     </div>
 

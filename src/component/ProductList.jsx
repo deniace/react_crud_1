@@ -22,6 +22,19 @@ function ProductList() {
         });
     }, []);
 
+    const deleteProduct = async (id) => {
+        const response = await axios.delete(`http://localhost:3001/products/${id}`);
+
+        if (response.data.success) {
+            alert(response.data.message);
+
+            // set products to new array without the deleted product
+            setProducts(products.filter(product => product.product_id !== id));
+        } else {
+            alert(response.data.message);
+        }
+    }
+
 
     return (
         <div className="container mx-auto p-4">
@@ -75,7 +88,7 @@ function ProductList() {
                                         <Link to={`/edit_product/${product.product_id}`} type="button" className="text-black bg-yellow-400 hover:bg-yellow-600 py-2 px-4 rounded mx-1 my-1">
                                             Edit
                                         </Link>
-                                        <button type="button" className="text-white bg-red-500 hover:bg-red-700 py-2 px-4 rounded mx-1 my-1 ">
+                                        <button type="button" onClick={() => deleteProduct(product.product_id)} className="text-white bg-red-500 hover:bg-red-700 py-2 px-4 rounded mx-1 my-1 ">
                                             Delete
                                         </button>
                                     </td>
